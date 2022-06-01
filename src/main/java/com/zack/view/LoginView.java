@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * on 2022/5/31 16:28
  */
 @SuppressWarnings("all")
-public class LoginView extends JFrame{
+public class LoginView extends JFrame {
     private JFrame frame;
     private JPanel jp;
     private JLabel imgLabel;
@@ -63,7 +63,7 @@ public class LoginView extends JFrame{
         //设置黄色背景
         jp.setBackground(yellowColor);
         //设置图片
-        ImageIcon imageIcon = new ImageIcon("src/main/java/com/zack/img/xianyu.png");
+        ImageIcon imageIcon = new ImageIcon("src/main/resources/img/xianyu.png");
         imgLabel = new JLabel();
         imgLabel.setIcon(imageIcon);
         //图片大小和位置
@@ -107,7 +107,7 @@ public class LoginView extends JFrame{
 
         //注册按钮
         btn_registered = new JButton();
-        btn_registered.setBounds(400,600,200,50);
+        btn_registered.setBounds(400, 570, 200, 50);
         btn_registered.setText("注册");
         btn_registered.setFont(font_text);
         jp.add(btn_registered);
@@ -123,14 +123,14 @@ public class LoginView extends JFrame{
         addCick();
     }
 
-    private void addCick(){
+    private void addCick() {
         btn_login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = jEditorPane.getText();
                 String password = jPasswordField.getText();
                 LoginService loginService = new LoginService();
-                ResultVO resultVO = loginService.login(name,password);
+                ResultVO resultVO = loginService.login(name, password);
             }
         });
         btn_registered.addActionListener(new ActionListener() {
