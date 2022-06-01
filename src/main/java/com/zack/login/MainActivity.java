@@ -12,4 +12,5 @@ public class MainActivity extends JFrame{
     public static void main(String[] args) {
         LoginView loginView = new LoginView();
     }
+
 }

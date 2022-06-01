@@ -113,6 +113,8 @@ public class LoginView extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String name = jEditorPane.getText();
                 String password = jPasswordField.getText();
+
+
                 System.out.println(name+" "+password);
             }
         });
