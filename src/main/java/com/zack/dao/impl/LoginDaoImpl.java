@@ -1,5 +1,6 @@
 package com.zack.dao.impl;
 
+import com.zack.VO.ResultVO;
 import com.zack.dao.LoginDao;
 import com.zack.entity.UserLogin;
 import com.zack.utils.JDBCUtils;
@@ -23,7 +24,7 @@ public class LoginDaoImpl implements LoginDao {
         int result = 0;
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
-        // 编写SQL语句 插入信息
+        // 编写SQL语句
         String sql = "SELECT id,account,user_pwd FROM user_login WHERE account = ? AND user_pwd = ?";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -45,11 +46,54 @@ public class LoginDaoImpl implements LoginDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            // 关闭资源
             JDBCUtils.close(statement, conn);
             JDBCUtils.close(resultSet);
         }
         return user;
     }
 
+    @Override
+    public int insertUser(String account, String userPwd) {
+        int re = 0;
+        // 获取连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "INSERT INTO user_login(account, user_pwd) VALUES(?, ?)";
+        PreparedStatement statement = null;
+        try {
+            statement = conn.prepareStatement(sql);
+            re = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCUtils.close(statement, conn);
+        }
+        return re;
+    }
 
+
+    @Override
+    public boolean findUserByAccount(String account) {
+        // 获取连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "SELECT * FROM user_login WHERE account = ?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement =  conn.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtils.close(statement, conn);
+            JDBCUtils.close(resultSet);
+        }
+        // 用户名不存在
+        if (resultSet != null) {
+            return false;
+        }
+        return true;
+    }
 }
