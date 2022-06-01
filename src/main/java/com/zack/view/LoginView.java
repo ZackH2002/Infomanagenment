@@ -1,5 +1,8 @@
 package com.zack.view;
 
+import com.zack.VO.ResultVO;
+import com.zack.service.LoginService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -126,9 +129,8 @@ public class LoginView extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String name = jEditorPane.getText();
                 String password = jPasswordField.getText();
-
-
-                System.out.println(name+" "+password);
+                LoginService loginService = new LoginService();
+                ResultVO resultVO = loginService.login(name,password);
             }
         });
         btn_registered.addActionListener(new ActionListener() {
