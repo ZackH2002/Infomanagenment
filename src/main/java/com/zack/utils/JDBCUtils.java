@@ -55,35 +55,40 @@ public class JDBCUtils {
         return connection;
     }
 
-    /**
-     * 释放资源
-     *
-     * @param connection
-     * @param preparedStatement
-     * @param resultSet
-     */
-    public static void release(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
 
-        if (resultSet != null) {
+    /**
+     * 封装PreparedStatement与Connection对象销毁细节
+     */
+    public static void close(PreparedStatement ps, Connection conn) {
+        if (ps != null) {
             try {
-                resultSet.close();
+                ps.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if (preparedStatement != null) {
+        if (conn != null) {
             try {
-                preparedStatement.close();
+                conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if (connection != null) {
+    }
+
+    /**
+     * 封装PreparedStatement与Connection与ResultSet对象销毁细节
+     *
+     * @param rs 查询结果集
+     */
+    public static void close(ResultSet rs) {
+        if (rs != null) {
             try {
-                connection.close();
+                rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         }
     }
 
