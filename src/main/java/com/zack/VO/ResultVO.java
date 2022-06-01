@@ -67,5 +67,12 @@ public class ResultVO {
         this.code = code;
     }
 
-
+    @Override
+    public String toString() {
+        return "ResultVO{" +
+                "message='" + message + '\'' +
+                ", data=" + data +
+                ", code=" + code +
+                '}';
+    }
 }
