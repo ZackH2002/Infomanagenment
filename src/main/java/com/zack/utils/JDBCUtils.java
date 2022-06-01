@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 /**
  * @author hyc
  * @createTime 01 19:53
- * @description
+ * @description JDBC工具类
  */
 
 @SuppressWarnings("all")
@@ -32,7 +32,7 @@ public class JDBCUtils {
     /**
      * 读书db文件 获取对应信息
      */
-    static{
+    static {
         ResourceBundle bundle = ResourceBundle.getBundle("db");
         driver = bundle.getString("driver");
         url = bundle.getString("url");
@@ -46,7 +46,7 @@ public class JDBCUtils {
             // 加载驱动
             Class.forName(driver);
             // 获取连接
-            connection = DriverManager.getConnection(url,username,password);
+            connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -57,27 +57,28 @@ public class JDBCUtils {
 
     /**
      * 释放资源
+     *
      * @param connection
      * @param preparedStatement
      * @param resultSet
      */
     public static void release(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
 
-        if(resultSet!=null) {
+        if (resultSet != null) {
             try {
                 resultSet.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(preparedStatement!=null) {
+        if (preparedStatement != null) {
             try {
                 preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(connection!=null) {
+        if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {

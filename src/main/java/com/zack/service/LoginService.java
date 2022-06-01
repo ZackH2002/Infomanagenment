@@ -12,6 +12,10 @@ public class LoginService {
 
     public ResultVO login(String name, String password) {
         ResultVO result = new ResultVO();
+        if (name == null || password == null) {
+            return result.message("用户名或者密码不能为空!").code(400);
+        }
+
 
         return result;
     }
