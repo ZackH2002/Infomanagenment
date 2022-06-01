@@ -1,4 +1,4 @@
-package com.zack.login;
+package com.zack.view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,10 +41,16 @@ public class LoginView extends JFrame{
     /**
      * 登录按钮
      */
+
+    private JButton btn_registered;
+
+    /**
+     * 注册按钮
+     */
     public LoginView() {
         frame = new JFrame("闲鱼");    //创建Frame窗口
         frame.setSize(600, 750);
-        Font font_text1 = new Font("20", Font.TYPE1_FONT, 20);
+        Font font_text = new Font("20", Font.TYPE1_FONT, 20);
         //黄色
         Color yellowColor = new Color(251, 209, 77);
         //透明色
@@ -65,13 +71,13 @@ public class LoginView extends JFrame{
         text_name = new JLabel();
         text_name.setText("账号");
         text_name.setBounds(200, 270, 600, 20);
-        text_name.setFont(font_text1);
+        text_name.setFont(font_text);
         text_name.setBackground(c_null);
         jp.add(text_name);
         //账号输入框
         jEditorPane = new JEditorPane();
         jEditorPane.setBounds(200, 300, 600, 30);
-        jEditorPane.setFont(font_text1);
+        jEditorPane.setFont(font_text);
         jp.add(jEditorPane);
         frame.add(jp);
 
@@ -79,22 +85,29 @@ public class LoginView extends JFrame{
         text_password = new JLabel();
         text_password.setText("密码");
         text_password.setBounds(200, 350, 600, 20);
-        text_password.setFont(font_text1);
+        text_password.setFont(font_text);
         text_password.setBackground(c_null);
         jp.add(text_password);
 
         //密码输入框
         jPasswordField = new JPasswordField();
         jPasswordField.setBounds(200, 380, 600, 30);
-        jPasswordField.setFont(font_text1);
+        jPasswordField.setFont(font_text);
         jp.add(jPasswordField);
 
         //登录按钮
         btn_login = new JButton();
         btn_login.setBounds(400, 500, 200, 50);
         btn_login.setText("登录");
-        btn_login.setFont(font_text1);
+        btn_login.setFont(font_text);
         jp.add(btn_login);
+
+        //注册按钮
+        btn_registered = new JButton();
+        btn_registered.setBounds(400,600,200,50);
+        btn_registered.setText("注册");
+        btn_registered.setFont(font_text);
+        jp.add(btn_registered);
 
         frame.add(jp);
 
@@ -114,6 +127,12 @@ public class LoginView extends JFrame{
                 String name = jEditorPane.getText();
                 String password = jPasswordField.getText();
                 System.out.println(name+" "+password);
+            }
+        });
+        btn_registered.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new RegisterView();
             }
         });
     }

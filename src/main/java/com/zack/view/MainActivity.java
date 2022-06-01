@@ -1,8 +1,6 @@
-package com.zack.login;
+package com.zack.view;
 
 import javax.swing.*;
-import javax.swing.text.PasswordView;
-import java.awt.*;
 
 /**
  * @author Zack
