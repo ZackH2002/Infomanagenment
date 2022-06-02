@@ -76,6 +76,7 @@ public class LoginDaoImpl implements LoginDao {
 
     @Override
     public boolean findUserByAccount(String account) {
+
         // 获取连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
@@ -83,6 +84,7 @@ public class LoginDaoImpl implements LoginDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
+            statement.setString(1,account);
             statement =  conn.prepareStatement(sql);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
