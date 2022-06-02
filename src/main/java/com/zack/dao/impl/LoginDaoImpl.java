@@ -64,6 +64,8 @@ public class LoginDaoImpl implements LoginDao {
         PreparedStatement statement = null;
         try {
             statement = conn.prepareStatement(sql);
+            statement.setString(1, account);
+            statement.setString(2, userPwd);
             re = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -84,8 +86,8 @@ public class LoginDaoImpl implements LoginDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            statement.setString(1,account);
             statement =  conn.prepareStatement(sql);
+            statement.setString(1,account);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
