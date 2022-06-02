@@ -19,7 +19,7 @@ public class PicUpload {
     /**
      * 图片上传的本地路径
      */
-    private static final String UPLOAD_PATH = "D:\\picture";
+    private static final String UPLOAD_PATH = "D:\\picture\\";
 
 
     public ResultVO upload(File file) {
@@ -36,7 +36,7 @@ public class PicUpload {
             return result.message("仅支持.jpg和.png类型的图片!").code(400);
         }
         // 最终的文件名字
-        String fileName = uuid + suffix;
+        String fileName = uuid + "." + suffix;
         // 文件最终的储存路径
         String filePath = UPLOAD_PATH + fileName;
         File newFile = new File(filePath);
