@@ -39,7 +39,7 @@ public class LoginService {
         return result.message("登录成功!").code(200).data(data);
     }
 
-    public ResultVO regis(String account, String userPwd) {
+    public ResultVO regis(String account, String userPwd, String nickName) {
         ResultVO result = new ResultVO();
         // 判空
         if (account == null || userPwd == null) {
@@ -50,7 +50,7 @@ public class LoginService {
             return result.message("该账户已存在!").code(400);
         }
 
-        int i = loginDao.insertUser(account, userPwd);
+        int i = loginDao.insertUser(account, userPwd, nickName);
         // 注册失败
         if (i < 0) {
             return result.message("操作失败!").code(500);

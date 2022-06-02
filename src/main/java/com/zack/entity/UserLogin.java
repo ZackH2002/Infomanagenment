@@ -22,6 +22,11 @@ public class UserLogin {
      */
     private String userPwd;
 
+    /**
+     * 用户昵称
+     */
+    private String nickName;
+
 
     @Override
     public String toString() {
@@ -29,6 +34,7 @@ public class UserLogin {
                 "userId=" + userId +
                 ", account='" + account + '\'' +
                 ", userPwd='" + userPwd + '\'' +
+                ", nickName='" + nickName + '\'' +
                 '}';
     }
 
@@ -57,5 +63,13 @@ public class UserLogin {
 
     public void setUserPwd(String userPwd) {
         this.userPwd = userPwd;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

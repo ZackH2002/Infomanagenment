@@ -19,9 +19,10 @@ public interface LoginDao {
      * 插入用户
      * @param account 用户账户
      * @param userPwd 用户密码
+     * @param nickName 用户昵称
      * @return 插入是否成功 大于0 - 成功
      */
-    int insertUser(String account, String userPwd);
+    int insertUser(String account, String userPwd, String nickName);
 
     /**
      * 通过账号查找用户

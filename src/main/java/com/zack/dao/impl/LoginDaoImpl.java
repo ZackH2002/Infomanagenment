@@ -55,17 +55,18 @@ public class LoginDaoImpl implements LoginDao {
     }
 
     @Override
-    public int insertUser(String account, String userPwd) {
+    public int insertUser(String account, String userPwd, String nickName) {
         int re = 0;
         // 获取连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
-        String sql = "INSERT INTO user_login(account, user_pwd) VALUES(?, ?)";
+        String sql = "INSERT INTO user_login(account, user_pwd, nick_name) VALUES(?, ?, ?)";
         PreparedStatement statement = null;
         try {
             statement = conn.prepareStatement(sql);
             statement.setString(1, account);
             statement.setString(2, userPwd);
+            statement.setString(3, nickName);
             re = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
