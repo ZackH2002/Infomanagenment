@@ -1,6 +1,7 @@
 package com.zack.view;
 
 import com.zack.VO.ResultVO;
+import com.zack.entity.UserLogin;
 import com.zack.service.LoginService;
 
 import javax.swing.*;
@@ -51,8 +52,17 @@ public class LoginView extends JFrame {
      * 注册按钮
      */
     public LoginView() {
+        inintView();
+        addClick();
+    }
+
+    /**
+     * 加载布局
+     */
+    private void inintView(){
         frame = new JFrame("闲鱼");    //创建Frame窗口
         frame.setSize(600, 750);
+        Color blueColor = new Color(77, 119, 251);
         Font font_text = new Font("20", Font.TYPE1_FONT, 20);
         //黄色
         Color yellowColor = new Color(251, 209, 77);
@@ -93,7 +103,7 @@ public class LoginView extends JFrame {
         jp.add(text_password);
 
         //密码输入框
-        jPasswordField = new JPasswordField();
+        jPasswordField = new JPasswordField(1);
         jPasswordField.setBounds(200, 380, 600, 30);
         jPasswordField.setFont(font_text);
         jp.add(jPasswordField);
@@ -103,6 +113,8 @@ public class LoginView extends JFrame {
         btn_login.setBounds(400, 500, 200, 50);
         btn_login.setText("登录");
         btn_login.setFont(font_text);
+        btn_login.setForeground(Color.white);
+        btn_login.setBackground(blueColor);
         jp.add(btn_login);
 
         //注册按钮
@@ -110,6 +122,8 @@ public class LoginView extends JFrame {
         btn_registered.setBounds(400, 570, 200, 50);
         btn_registered.setText("注册");
         btn_registered.setFont(font_text);
+        btn_registered.setForeground(Color.white);
+        btn_registered.setBackground(blueColor);
         jp.add(btn_registered);
 
         frame.add(jp);
@@ -120,17 +134,29 @@ public class LoginView extends JFrame {
         //设置窗口大小不能改变
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        addCick();
     }
-
-    private void addCick() {
+    private void addClick() {
         btn_login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = jEditorPane.getText();
                 String password = jPasswordField.getText();
                 LoginService loginService = new LoginService();
-                ResultVO resultVO = loginService.login(name, password);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ResultVO resultVO = loginService.login(name, password);
+                        if (resultVO.getCode() == 400) {
+                            JOptionPane.showMessageDialog(jp, resultVO.getMessage(), "登录错误", 0);
+                        }else if(resultVO.getCode() == 200){
+                            JOptionPane.showMessageDialog(jp,resultVO.getMessage(),"登录",-1);
+                            UserLogin userLogin = (UserLogin) resultVO.getData().get("userInfo");
+                            new HomeView(userLogin);
+                            frame.dispose();
+                        }
+                    }
+                }).start();
+
             }
         });
         btn_registered.addActionListener(new ActionListener() {
