@@ -3,19 +3,20 @@ package com.zack.service;
 import com.zack.VO.ResultVO;
 import com.zack.dao.impl.LoginDaoImpl;
 import com.zack.entity.UserLogin;
-import com.zack.utils.JDBCUtils;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author hyc
  * @createTime 01 20:01
- * @description 用户登录逻辑
+ * @description 用户登录注册逻辑
  */
 public class LoginService {
 
+    /**
+     * 注入loginDao
+     */
     LoginDaoImpl loginDao = new LoginDaoImpl();
 
     public ResultVO login(String name, String password) {
@@ -37,6 +38,27 @@ public class LoginService {
         System.out.println("登录成功");
         return result.message("登录成功!").code(200).data(data);
     }
+
+    public ResultVO regis(String account, String userPwd) {
+        ResultVO result = new ResultVO();
+        // 判空
+        if (account == null || userPwd == null) {
+            return result.message("用户名或密码不能为空!").code(400);
+        }
+        // 判断账户是否被注册过
+        if (loginDao.findUserByAccount(account)) {
+            return result.message("该账户已存在!").code(400);
+        }
+
+        int i = loginDao.insertUser(account, userPwd);
+        // 注册失败
+        if (i < 0) {
+            return result.message("操作失败!").code(500);
+        }
+
+        return result.message("注册成功!").code(200);
+    }
+
 
 
 }
