@@ -17,9 +17,10 @@ import java.util.Map;
 public class PicUpload {
 
     /**
-     * 图片上传的服务器路径
+     * 图片上传的本地路径
      */
-    private static final String UPLOAD_PATH = "http://47.108.166.59/80:";
+    private static final String UPLOAD_PATH = "D:\\picture";
+
 
     public ResultVO upload(File file) {
         Map<Object, Object> map = new HashMap<>();
@@ -41,8 +42,7 @@ public class PicUpload {
         File newFile = new File(filePath);
         // 判断文件是否已经存在
         if (!newFile.getParentFile().exists()) {
-
-            // 创建文件
+            // 不存在则创建文件
             if (!newFile.mkdirs()) {
                 return result.message("操作失败!").code(500);
             }
