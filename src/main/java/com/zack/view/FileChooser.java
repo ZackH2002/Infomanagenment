@@ -32,6 +32,7 @@ public class FileChooser extends JFrame implements ActionListener {
             PicUpload picUpload = new PicUpload();
             ResultVO result  = picUpload.upload(file1);
             System.out.println(result.getCode());
+            System.out.println(result.getData().get("url"));
             System.out.println("文件:"+file.getAbsolutePath());
         }
         System.out.println(jfc.getSelectedFile().getName());
