@@ -133,6 +133,7 @@ public class RegisterView extends JFrame {
                 ResultVO resultVO = loginService.regis(name,password);
                 if(resultVO.getCode() == 200){
                     JOptionPane.showMessageDialog(jPanel,resultVO.getMessage(),"注册", JOptionPane.PLAIN_MESSAGE);
+                    frame.dispose();
                 }else {
                     JOptionPane.showMessageDialog(jPanel,resultVO.getMessage(),"注册",1);
                 }
