@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @author hyc
  * @createTime 01 19:56
- * @description
+ * @description 统一响应格式
  */
 public class ResultVO {
 
@@ -22,7 +22,6 @@ public class ResultVO {
     /**
      * 返回状态码
      */
-
     private int code;
 
 
