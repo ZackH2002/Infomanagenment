@@ -135,7 +135,18 @@ public class LoginView extends JFrame {
                 String name = jEditorPane.getText();
                 String password = jPasswordField.getText();
                 LoginService loginService = new LoginService();
-                ResultVO resultVO = loginService.login(name, password);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ResultVO resultVO = loginService.login(name, password);
+                        if (resultVO.getCode() == 400) {
+                            JOptionPane.showMessageDialog(jp, resultVO.getMessage(), "登录错误", 0);
+                        }else if(resultVO.getCode() == 200){
+                            JOptionPane.showMessageDialog(jp,resultVO.getMessage(),"登录",-1);
+                        }
+                    }
+                }).start();
+
             }
         });
         btn_registered.addActionListener(new ActionListener() {

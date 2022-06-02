@@ -1,5 +1,8 @@
 package com.zack.view;
 
+import com.zack.VO.ResultVO;
+import com.zack.service.LoginService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +15,7 @@ import java.awt.event.ActionListener;
 public class RegisterView extends JFrame {
     private JFrame frame;
     private JLabel head;
+    private JPanel jPanel;
     private JLabel text_nickName;
     /**
      * 昵称提示
@@ -58,7 +62,7 @@ public class RegisterView extends JFrame {
         frame.setVisible(true);
         //frame.setLayout(new GridLayout(3,1,10,5));
         //创建头像面板
-        JPanel jPanel=new JPanel();
+        jPanel=new JPanel();
         jPanel.setBackground(yellowColor);
         jPanel.setLayout(new FlowLayout(FlowLayout.CENTER,200,20));
         //设置图片
@@ -125,6 +129,13 @@ public class RegisterView extends JFrame {
                 String name = jEditorPane.getText();
                 String password = jPasswordField.getText();
                 String nikeName = edit_nickName.getText();
+                LoginService loginService = new LoginService();
+                ResultVO resultVO = loginService.regis(name,password);
+                if(resultVO.getCode() == 200){
+                    JOptionPane.showMessageDialog(jPanel,resultVO.getMessage(),"注册", JOptionPane.PLAIN_MESSAGE);
+                }else {
+                    JOptionPane.showMessageDialog(jPanel,resultVO.getMessage(),"注册",1);
+                }
             }
         });
 
