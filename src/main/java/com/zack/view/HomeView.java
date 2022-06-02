@@ -32,5 +32,6 @@ public class HomeView extends JFrame {
         //设置窗口大小不能改变
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //new FileChooser();
     }
 }
