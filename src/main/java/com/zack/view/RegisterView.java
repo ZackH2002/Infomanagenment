@@ -16,6 +16,8 @@ public class RegisterView extends JFrame {
     private JFrame frame;
     private JLabel head;
     private JPanel jPanel;
+    private JPanel btn_panel;
+    private JPanel edit_panel;
     private JLabel text_nickName;
     /**
      * 昵称提示
@@ -49,6 +51,15 @@ public class RegisterView extends JFrame {
      * 注册按钮
      */
     public RegisterView() {
+        initView();
+        addClick();
+
+    }
+
+    /**
+     * 加载布局
+     */
+    private void initView(){
         Font font_text = new Font("20", Font.TYPE1_FONT, 20);
         //黄色
         Color yellowColor = new Color(251, 209, 77);
@@ -60,7 +71,7 @@ public class RegisterView extends JFrame {
         frame.setSize(600, 750);
         frame.setBounds(1200, 200, 500, 700);
         frame.setVisible(true);
-        //frame.setLayout(new GridLayout(3,1,10,5));
+        frame.setLayout(new BorderLayout());
         //创建头像面板
         jPanel=new JPanel();
         jPanel.setBackground(yellowColor);
@@ -70,18 +81,22 @@ public class RegisterView extends JFrame {
         head = new JLabel();
         head.setIcon(imageIcon);
         jPanel.add(head);
+        frame.add(jPanel,BorderLayout.NORTH);
+        edit_panel = new JPanel();
+        edit_panel.setBackground(yellowColor);
+        edit_panel.setLayout(new FlowLayout(FlowLayout.LEADING,20,40));
         //昵称文字
         text_nickName = new JLabel();
         text_nickName.setText("昵称");
         text_nickName.setBounds(200, 270, 800, 20);
         text_nickName.setFont(font_text);
         text_nickName.setBackground(c_null);
-        jPanel.add(text_nickName);
+        edit_panel.add(text_nickName);
         //昵称输入框
         edit_nickName = new JEditorPane();
-        edit_nickName.setBounds(200, 300, 400, 30);
+        edit_nickName.setBounds(200, 300, 350, 30);
         edit_nickName.setFont(font_text);
-        jPanel.add(edit_nickName);
+        edit_panel.add(edit_nickName);
         //账号文字区域
         //账号文字
         text_name = new JLabel();
@@ -89,39 +104,43 @@ public class RegisterView extends JFrame {
         text_name.setBounds(200, 270, 800, 20);
         text_name.setFont(font_text);
         text_name.setBackground(c_null);
-        jPanel.add(text_name);
+        edit_panel.add(text_name);
         //账号输入框
         jEditorPane = new JEditorPane();
-        jEditorPane.setBounds(200, 300, 400, 30);
+        jEditorPane.setBounds(200, 300, 350, 30);
         jEditorPane.setFont(font_text);
-        jPanel.add(jEditorPane);
+        edit_panel.add(jEditorPane);
         //密码文字
         text_password = new JLabel();
         text_password.setText("密码");
         text_password.setBounds(200, 350, 800, 20);
         text_password.setFont(font_text);
         text_password.setBackground(c_null);
-        jPanel.add(text_password);
+        edit_panel.add(text_password);
 
         //密码输入框
         jPasswordField = new JEditorPane();
-        jPasswordField.setBounds(200, 480, 400, 30);
+        jPasswordField.setBounds(200, 480, 350, 30);
         jPasswordField.setFont(font_text);
-        jPanel.add(jPasswordField);
+        edit_panel.add(jPasswordField);
 
+        btn_panel = new JPanel();
+        btn_panel.setBackground(yellowColor);
+        btn_panel.setLayout(new FlowLayout(FlowLayout.CENTER,200,20));
         btn_register = new JButton();
         btn_register.setBounds(400, 570, 200, 50);
         btn_register.setText("注册");
         btn_register.setFont(font_text);
         btn_register.setForeground(Color.white);
         btn_register.setBackground(blueColor);
-        jPanel.add(btn_register);
-        //添加面板到容器
-        frame.add(jPanel);
-        //frame.add(edit_jPanel);
-        addClick();
-
+        btn_panel.add(btn_register);
+        edit_panel.add(btn_panel);
+        frame.add(edit_panel,BorderLayout.CENTER);
     }
+
+    /**
+     * 添加点击
+     */
     private void addClick(){
         btn_register.addActionListener(new ActionListener() {
             @Override
@@ -130,7 +149,7 @@ public class RegisterView extends JFrame {
                 String password = jPasswordField.getText();
                 String nikeName = edit_nickName.getText();
                 LoginService loginService = new LoginService();
-                ResultVO resultVO = loginService.regis(name,password);
+                ResultVO resultVO = loginService.regis(name,password,nikeName);
                 if(resultVO.getCode() == 200){
                     JOptionPane.showMessageDialog(jPanel,resultVO.getMessage(),"注册", JOptionPane.PLAIN_MESSAGE);
                     frame.dispose();

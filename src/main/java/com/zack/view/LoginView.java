@@ -1,6 +1,7 @@
 package com.zack.view;
 
 import com.zack.VO.ResultVO;
+import com.zack.entity.UserLogin;
 import com.zack.service.LoginService;
 
 import javax.swing.*;
@@ -51,6 +52,14 @@ public class LoginView extends JFrame {
      * 注册按钮
      */
     public LoginView() {
+        inintView();
+        addClick();
+    }
+
+    /**
+     * 加载布局
+     */
+    private void inintView(){
         frame = new JFrame("闲鱼");    //创建Frame窗口
         frame.setSize(600, 750);
         Color blueColor = new Color(77, 119, 251);
@@ -125,9 +134,7 @@ public class LoginView extends JFrame {
         //设置窗口大小不能改变
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        addClick();
     }
-
     private void addClick() {
         btn_login.addActionListener(new ActionListener() {
             @Override
@@ -143,6 +150,9 @@ public class LoginView extends JFrame {
                             JOptionPane.showMessageDialog(jp, resultVO.getMessage(), "登录错误", 0);
                         }else if(resultVO.getCode() == 200){
                             JOptionPane.showMessageDialog(jp,resultVO.getMessage(),"登录",-1);
+                            UserLogin userLogin = (UserLogin) resultVO.getData().get("userInfo");
+                            new HomeView(userLogin);
+                            frame.dispose();
                         }
                     }
                 }).start();
