@@ -1,7 +1,6 @@
 package com.zack.view;
 
 import com.zack.VO.ResultVO;
-import com.zack.service.PicUpload;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

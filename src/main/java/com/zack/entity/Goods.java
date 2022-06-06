@@ -40,6 +40,8 @@ public class Goods {
      *介绍
      */
     private String content;
+
+
     public Goods() {
     }
 
