@@ -62,10 +62,10 @@ public class LoginView extends JFrame {
     private void inintView(){
         frame = new JFrame("闲鱼");    //创建Frame窗口
         frame.setSize(600, 750);
-        Color blueColor = new Color(77, 119, 251);
+        Color blueColor = new Color(254, 177, 29);
         Font font_text = new Font("20", Font.TYPE1_FONT, 20);
         //黄色
-        Color yellowColor = new Color(251, 209, 77);
+        Color yellowColor = new Color(255, 230, 15);
         //透明色
         Color c_null = new Color(251, 209, 77, 0);
         jp = new JPanel();    //创建JPanel对象
@@ -115,6 +115,7 @@ public class LoginView extends JFrame {
         btn_login.setFont(font_text);
         btn_login.setForeground(Color.white);
         btn_login.setBackground(blueColor);
+        btn_login.setBorder(null);
         jp.add(btn_login);
 
         //注册按钮
@@ -124,6 +125,7 @@ public class LoginView extends JFrame {
         btn_registered.setFont(font_text);
         btn_registered.setForeground(Color.white);
         btn_registered.setBackground(blueColor);
+        btn_registered.setBorder(null);
         jp.add(btn_registered);
 
         frame.add(jp);

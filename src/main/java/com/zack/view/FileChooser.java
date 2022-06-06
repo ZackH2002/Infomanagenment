@@ -14,6 +14,7 @@ import java.io.File;
  */
 public class FileChooser extends JFrame implements ActionListener {
     JButton open=null;
+    private String filePath;
     public FileChooser(){
         //open=new JButton("open");
         //this.add(open);
@@ -33,6 +34,7 @@ public class FileChooser extends JFrame implements ActionListener {
             ResultVO result  = picUpload.upload(file1);
             System.out.println(result.getCode());
             System.out.println(result.getData().get("url"));
+            filePath = file.getAbsolutePath();
             System.out.println("文件:"+file.getAbsolutePath());
         }
         System.out.println(jfc.getSelectedFile().getName());
@@ -42,5 +44,8 @@ public class FileChooser extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
 
+    }
+    public String filePath(){
+        return filePath;
     }
 }
