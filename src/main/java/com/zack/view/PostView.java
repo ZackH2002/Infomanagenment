@@ -28,6 +28,12 @@ public class PostView extends JFrame {
     private JPanel choosePanel;
     private JButton chooseBtn;
     private String imgUrl;
+    private JPanel pricePanel;
+    private JEditorPane numEdit;
+    private JPanel numPanel;
+    private JPanel contentPanel;
+    private JEditorPane priceEdit;
+
     public PostView(UserLogin userLogin){
         this.userLogin = userLogin;
         imgUrl = null;
@@ -56,7 +62,7 @@ public class PostView extends JFrame {
         frame.setLayout(new BorderLayout());
         //窗口大小
         frame.setVisible(true);
-        frame.setBounds(500, 200, 500, 900);
+        frame.setBounds(500, 200, 500, 700);
         topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
         imgPanel = new PartPanel();
@@ -102,12 +108,54 @@ public class PostView extends JFrame {
         //Label label2 = new Label("2");
         //Label label3 = new Label("3");
         //Label label4 = new Label("4");
+
+        pricePanel = new JPanel();
+        pricePanel.setLayout(new FlowLayout());
+        JLabel priceLabel = new JLabel();
+        try {
+            Image image = ImageIO.read(new File("src/main/resources/img/consumption.png")).getScaledInstance(40,40,Image.SCALE_DEFAULT);
+            priceLabel.setIcon(new ImageIcon(image));
+            //priceLabel.setBorder(new EmptyBorder(0, 0, 0, 20));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JLabel priceText = new JLabel("价格");
+        priceText.setFont(new Font(null,0,20));
+        priceEdit = new JEditorPane();
+        priceEdit.setFont(new Font(null,0,20));
+        priceEdit.setPreferredSize(new Dimension(300,30));
+        pricePanel.add(priceLabel);
+        pricePanel.add(priceText);
+        pricePanel.add(priceEdit);
+
+        numPanel = new JPanel();
+        numPanel.setLayout(new FlowLayout());
+        JLabel numLabel = new JLabel();
+        try {
+            Image image = ImageIO.read(new File("src/main/resources/img/packaging.png")).getScaledInstance(40,40,Image.SCALE_DEFAULT);
+            numLabel.setIcon(new ImageIcon(image));
+            //priceLabel.setBorder(new EmptyBorder(0, 0, 0, 20));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JLabel numText = new JLabel("库存");
+        numText.setFont(new Font(null,0,20));
+        numEdit = new JEditorPane();
+        numEdit.setFont(new Font(null,0,20));
+        numEdit.setPreferredSize(new Dimension(300,30));
+        numPanel.add(numLabel);
+        numPanel.add(numText);
+        numPanel.add(numEdit);
+
         centerPanel.add(choosePanel);
+        centerPanel.add(pricePanel);
+        centerPanel.add(numPanel);
         //centerPanel.add(label2);
         //centerPanel.add(label3);
         //centerPanel.add(label4);
 
         frame.add(topPanel,BorderLayout.NORTH);
         frame.add(centerPanel,BorderLayout.CENTER);
+        frame.setResizable(false);
     }
 }
