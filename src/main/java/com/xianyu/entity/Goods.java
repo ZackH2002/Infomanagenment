@@ -3,6 +3,7 @@ package com.xianyu.entity;
 /**
  * @author Zack
  * on 2022/6/6 10:41
+ * @description 商品实体
  */
 public class Goods {
 
