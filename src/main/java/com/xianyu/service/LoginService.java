@@ -1,6 +1,7 @@
 package com.xianyu.service;
 
 import com.xianyu.VO.ResultVO;
+import com.xianyu.dao.LoginDao;
 import com.xianyu.dao.impl.LoginDaoImpl;
 import com.xianyu.entity.UserLogin;
 
@@ -17,7 +18,7 @@ public class LoginService {
     /**
      * 注入loginDao
      */
-    LoginDaoImpl loginDao = new LoginDaoImpl();
+    LoginDao loginDao = new LoginDaoImpl();
 
     public ResultVO login(String name, String password) {
         ResultVO result = new ResultVO();

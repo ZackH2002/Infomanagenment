@@ -24,7 +24,7 @@ public class LoginDaoImpl implements LoginDao {
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
-        String sql = "SELECT id,account,user_pwd FROM user_login WHERE account = ? AND user_pwd = ?";
+        String sql = "SELECT id,account,user_pwd,nick_name FROM user_login WHERE account = ? AND user_pwd = ?";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
@@ -40,6 +40,7 @@ public class LoginDaoImpl implements LoginDao {
                 user.setUserId(resultSet.getInt(1));
                 user.setAccount(resultSet.getString(2));
                 user.setUserPwd(resultSet.getString(3));
+                user.setNickName(resultSet.getString(4));
             }
 
         } catch (SQLException e) {
