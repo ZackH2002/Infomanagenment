@@ -70,7 +70,7 @@ public class GoodsDAOImpl implements GoodsDao {
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
-        String sql = "INSERT INTO good VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO goods(name, price, url, num, seller_id, content) VALUES(?,?,?,?,?,?)";
         PreparedStatement statement = null;
         int re = 0;
         try {
