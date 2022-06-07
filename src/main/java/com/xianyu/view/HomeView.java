@@ -1,7 +1,9 @@
 package com.xianyu.view;
 
+import com.xianyu.VO.ResultVO;
 import com.xianyu.entity.Goods;
 import com.xianyu.entity.UserLogin;
+import com.xianyu.service.GoodsService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  * @author Zack
@@ -28,6 +33,8 @@ public class HomeView extends JFrame {
     private JButton homeButton;
     private JButton postButton;
     private JPanel topJPanel;
+    private List<Goods> list;
+    private GoodsService goodsService;
     private ArrayList<Goods> goodsArrayList;
 
     public HomeView(UserLogin userLogin) {
@@ -48,22 +55,25 @@ public class HomeView extends JFrame {
         topJPanel.add(homeButton);
         topJPanel.add(postButton);
         topJPanel.add(myButton);
-        goodsArrayList = new ArrayList<Goods>();
-        for (int i = 0; i < 15; i++) {
-            Goods goods = new Goods();
-            goods.setName("iphone" + i);
-            goods.setPrice(123.00);
-            goods.setContent("这是一个嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎");
-            goods.setUrl("C:\\Users\\Zack\\Pictures\\Saved Pictures\\123.png");
-            goodsArrayList.add(goods);
-        }
-        HomeListMode homeListMode = new HomeListMode(goodsArrayList);
+        // goodsArrayList = new ArrayList<Goods>();
+        goodsService = new GoodsService();
+        list = goodsService.listGoods();
+
+//        for (int i = 0; i < 15; i++) {
+//            Goods goods = new Goods();
+//            goods.setName("iphone" + i);
+//            goods.setPrice(123.00);
+//            goods.setContent("这是一个嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎");
+//            goods.setUrl("C:\\Users\\Zack\\Pictures\\Saved Pictures\\123.png");
+//            goodsArrayList.add(goods);
+//        }
+        HomeListMode homeListMode = new HomeListMode(list);
         jList = new JList(homeListMode);
         jList.setCellRenderer(new HomeListCellRenderer());
         jList.setPreferredSize(new Dimension(600, 1000));
         JScrollPane jScrollPane = new JScrollPane(jList);
         jList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        int row = goodsArrayList.size() / 4 + 1;
+        int row = list.size() / 4 + 1;
         jList.setVisibleRowCount(row);
         //jScrollPane.setPreferredSize(new Dimension(600, 700));
         frame = new JFrame("首页");
@@ -93,7 +103,8 @@ public class HomeView extends JFrame {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 int i = jList.getSelectedIndex();
-                Goods goods = goodsArrayList.get(i);
+                System.out.println(i);
+                Goods goods = list.get(i);
                 try {
                     new GoodsView(goods);
                 } catch (IOException ex) {
@@ -116,11 +127,11 @@ public class HomeView extends JFrame {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Goods g = new Goods();
-                g.setName("1111");
-                g.setUrl("C:\\Users\\Zack\\Pictures\\Saved Pictures\\123.png");
-                g.setPrice(122);
-                goodsArrayList.add(0, g);
+                list = goodsService.listGoods();
+                HomeListMode homeListMode = new HomeListMode(list);
+                jList.setModel(homeListMode);
+                jList.revalidate();
+                jList.repaint();
             }
         });
     }

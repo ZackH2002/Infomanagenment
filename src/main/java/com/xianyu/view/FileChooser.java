@@ -1,7 +1,7 @@
 package com.xianyu.view;
 
 import com.xianyu.VO.ResultVO;
-//import com.xianyu.service.PicUpload;
+//import com.Panu.service.PicUpload;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

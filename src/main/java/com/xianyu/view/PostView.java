@@ -1,6 +1,9 @@
 package com.xianyu.view;
 
+import com.xianyu.VO.ResultVO;
+import com.xianyu.entity.Goods;
 import com.xianyu.entity.UserLogin;
+import com.xianyu.service.GoodsService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -43,7 +48,7 @@ public class PostView extends JFrame {
     private JButton postBtn;
     private JPanel btnPanel;
 
-    public PostView(UserLogin userLogin){
+    public PostView(UserLogin userLogin) {
         this.userLogin = userLogin;
         imgUrl = null;
         initView();
@@ -58,10 +63,35 @@ public class PostView extends JFrame {
                 imgUrl = fileChooser.filePath();
                 frame.dispose();
                 initView();
+                addClick();
 
                 //System.out.println(imgUrl);
             }
         });
+        postBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Goods goods = new Goods();
+                String name = nameEdit.getText();
+                int price = Integer.parseInt(priceEdit.getText());
+                String content = contentEdit.getText();
+                int num = Integer.parseInt(numEdit.getText());
+                goods.setName(name);
+                goods.setPrice(price);
+                goods.setUrl(imgUrl);
+                goods.setNum(num);
+                goods.setSellerId(userLogin.getUserId());
+                goods.setContent(content);
+                GoodsService goodsService = new GoodsService();
+                ResultVO resultVO = goodsService.addGoods(goods);
+                if (resultVO.getCode() == 200) {
+                    JOptionPane.showMessageDialog(frame,resultVO.getMessage(),"发布",-1);
+                    frame.dispose();
+                }
+            }
+        });
+
     }
 
     private void initView() {
@@ -78,10 +108,10 @@ public class PostView extends JFrame {
         topPanel.setLayout(new BorderLayout());
         imgPanel = new PartPanel(yellowColor);
         //imgPanel.setBorder(new EmptyBorder(10, 40, 20, 40));
-        imgLabel = new JLabel("",JLabel.CENTER);
+        imgLabel = new JLabel("", JLabel.CENTER);
         //imgPanel.setBackground(yellowColor);
         try {
-            Image image = ImageIO.read(new File("src/main/resources/img/post.png")).getScaledInstance(60,60,Image.SCALE_DEFAULT);
+            Image image = ImageIO.read(new File("src/main/resources/img/post.png")).getScaledInstance(60, 60, Image.SCALE_DEFAULT);
             imgLabel.setIcon(new ImageIcon(image));
             imgLabel.setBorder(new EmptyBorder(0, 40, 0, 40));
         } catch (IOException e) {
@@ -94,22 +124,22 @@ public class PostView extends JFrame {
         rightPanel.add(label);
         imgPanel.add(imgLabel);
         //topPanel.add(leftPanel,BorderLayout.WEST);
-        topPanel.add(imgPanel,BorderLayout.CENTER);
-        topPanel.setBorder(new EmptyBorder(0,20,0,20));
-       // topPanel.add(rightPanel,BorderLayout.EAST);
+        topPanel.add(imgPanel, BorderLayout.CENTER);
+        topPanel.setBorder(new EmptyBorder(0, 20, 0, 20));
+        // topPanel.add(rightPanel,BorderLayout.EAST);
 
         //中心部分
         centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout(5,1));
+        centerPanel.setLayout(new GridLayout(5, 1));
 
         //选择图片部分
         choosePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        if(imgUrl!=null){
+        if (imgUrl != null) {
             System.out.println(imgUrl);
             //String newUrl = imgUrl.replaceAll("/", "//");
             goodsImg = new JLabel();
             try {
-                Image image = ImageIO.read(new File(imgUrl)).getScaledInstance(150,150,Image.SCALE_DEFAULT);
+                Image image = ImageIO.read(new File(imgUrl)).getScaledInstance(150, 150, Image.SCALE_DEFAULT);
                 goodsImg.setIcon(new ImageIcon(image));
                 goodsImg.setBorder(new EmptyBorder(0, 40, 0, 40));
                 System.out.println(imgUrl);
@@ -129,17 +159,17 @@ public class PostView extends JFrame {
         namePanel.setLayout(new FlowLayout());
         nameImg = new JLabel();
         try {
-            Image image = ImageIO.read(new File("src/main/resources/img/code.png")).getScaledInstance(40,40,Image.SCALE_DEFAULT);
+            Image image = ImageIO.read(new File("src/main/resources/img/code.png")).getScaledInstance(40, 40, Image.SCALE_DEFAULT);
             nameImg.setIcon(new ImageIcon(image));
             //priceLabel.setBorder(new EmptyBorder(0, 0, 0, 20));
         } catch (IOException e) {
             e.printStackTrace();
         }
         nameText = new JLabel("名称");
-        nameText.setFont(new Font(null,0,20));
+        nameText.setFont(new Font(null, 0, 20));
         nameEdit = new JEditorPane();
-        nameEdit.setFont(new Font(null,0,20));
-        nameEdit.setPreferredSize(new Dimension(300,30));
+        nameEdit.setFont(new Font(null, 0, 20));
+        nameEdit.setPreferredSize(new Dimension(300, 30));
         namePanel.add(nameImg);
         namePanel.add(nameText);
         namePanel.add(nameEdit);
@@ -149,17 +179,17 @@ public class PostView extends JFrame {
         pricePanel.setLayout(new FlowLayout());
         JLabel priceLabel = new JLabel();
         try {
-            Image image = ImageIO.read(new File("src/main/resources/img/consumption.png")).getScaledInstance(40,40,Image.SCALE_DEFAULT);
+            Image image = ImageIO.read(new File("src/main/resources/img/consumption.png")).getScaledInstance(40, 40, Image.SCALE_DEFAULT);
             priceLabel.setIcon(new ImageIcon(image));
             //priceLabel.setBorder(new EmptyBorder(0, 0, 0, 20));
         } catch (IOException e) {
             e.printStackTrace();
         }
         JLabel priceText = new JLabel("价格");
-        priceText.setFont(new Font(null,0,20));
+        priceText.setFont(new Font(null, 0, 20));
         priceEdit = new JEditorPane();
-        priceEdit.setFont(new Font(null,0,20));
-        priceEdit.setPreferredSize(new Dimension(300,30));
+        priceEdit.setFont(new Font(null, 0, 20));
+        priceEdit.setPreferredSize(new Dimension(300, 30));
         pricePanel.add(priceLabel);
         pricePanel.add(priceText);
         pricePanel.add(priceEdit);
@@ -169,17 +199,17 @@ public class PostView extends JFrame {
         numPanel.setLayout(new FlowLayout());
         JLabel numLabel = new JLabel();
         try {
-            Image image = ImageIO.read(new File("src/main/resources/img/packaging.png")).getScaledInstance(40,40,Image.SCALE_DEFAULT);
+            Image image = ImageIO.read(new File("src/main/resources/img/packaging.png")).getScaledInstance(40, 40, Image.SCALE_DEFAULT);
             numLabel.setIcon(new ImageIcon(image));
             //priceLabel.setBorder(new EmptyBorder(0, 0, 0, 20));
         } catch (IOException e) {
             e.printStackTrace();
         }
         JLabel numText = new JLabel("库存");
-        numText.setFont(new Font(null,0,20));
+        numText.setFont(new Font(null, 0, 20));
         numEdit = new JEditorPane();
-        numEdit.setFont(new Font(null,0,20));
-        numEdit.setPreferredSize(new Dimension(300,30));
+        numEdit.setFont(new Font(null, 0, 20));
+        numEdit.setPreferredSize(new Dimension(300, 30));
         numPanel.add(numLabel);
         numPanel.add(numText);
         numPanel.add(numEdit);
@@ -190,17 +220,17 @@ public class PostView extends JFrame {
         contentPanel.setLayout(new FlowLayout());
         contentImg = new JLabel();
         try {
-            Image image = ImageIO.read(new File("src/main/resources/img/editor.png")).getScaledInstance(40,40,Image.SCALE_DEFAULT);
+            Image image = ImageIO.read(new File("src/main/resources/img/editor.png")).getScaledInstance(40, 40, Image.SCALE_DEFAULT);
             contentImg.setIcon(new ImageIcon(image));
             //priceLabel.setBorder(new EmptyBorder(0, 0, 0, 20));
         } catch (IOException e) {
             e.printStackTrace();
         }
         contentText = new JLabel("商品描述");
-        contentText.setFont(new Font(null,0,20));
+        contentText.setFont(new Font(null, 0, 20));
         contentEdit = new JTextArea();
-        contentEdit.setFont(new Font(null,0,20));
-        contentEdit.setPreferredSize(new Dimension(300,60));
+        contentEdit.setFont(new Font(null, 0, 20));
+        contentEdit.setPreferredSize(new Dimension(300, 60));
         contentPanel.add(contentImg);
         contentPanel.add(contentText);
         contentPanel.add(contentEdit);
@@ -217,10 +247,10 @@ public class PostView extends JFrame {
         btnPanel.setLayout(new BorderLayout());
         postBtn = new JButton("发布");
         btnPanel.setBorder(new EmptyBorder(20, 40, 60, 40));
-        btnPanel.add(postBtn,BorderLayout.CENTER);
-        frame.add(topPanel,BorderLayout.NORTH);
-        frame.add(centerPanel,BorderLayout.CENTER);
-        frame.add(btnPanel,BorderLayout.SOUTH);
+        btnPanel.add(postBtn, BorderLayout.CENTER);
+        frame.add(topPanel, BorderLayout.NORTH);
+        frame.add(centerPanel, BorderLayout.CENTER);
+        frame.add(postBtn, BorderLayout.SOUTH);
         frame.setResizable(false);
     }
 }

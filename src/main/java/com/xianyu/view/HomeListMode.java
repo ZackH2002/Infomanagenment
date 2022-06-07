@@ -9,15 +9,16 @@ import com.xianyu.entity.Goods;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ListModel列表模型，用于获取列表中每个单元格的值以及列表的长度，
  */
 public class HomeListMode extends AbstractListModel {
 
-    ArrayList<Goods> gArrayList;
+    List<Goods> gArrayList;
 
-    public HomeListMode(ArrayList<Goods> gArrayList) {
+    public HomeListMode(List<Goods> gArrayList) {
         this.gArrayList = gArrayList;
     }
 
