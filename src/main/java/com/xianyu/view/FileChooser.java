@@ -1,7 +1,7 @@
 package com.xianyu.view;
 
 import com.xianyu.VO.ResultVO;
-import com.xianyu.service.PicUpload;
+//import com.xianyu.service.PicUpload;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,10 +31,10 @@ public class FileChooser extends JFrame implements ActionListener {
             System.out.println("文件夹:" + file.getAbsolutePath());
         } else if (file.isFile()) {
             File file1 = jfc.getSelectedFile();
-            PicUpload picUpload = new PicUpload();
-            ResultVO result = picUpload.upload(file1);
-            System.out.println(result.getCode());
-            System.out.println(result.getData().get("url"));
+//            PicUpload picUpload = new PicUpload();
+//            ResultVO result = picUpload.upload(file1);
+//            System.out.println(result.getCode());
+//            System.out.println(result.getData().get("url"));
             filePath = file.getAbsolutePath();
             System.out.println("文件:" + file.getAbsolutePath());
         }
