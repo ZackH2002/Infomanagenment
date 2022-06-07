@@ -30,7 +30,7 @@ public class UserLogin {
     /**
      * 用户账户余额
      */
-    private String balance;
+    private double balance;
 
     @Override
     public String toString() {
@@ -78,11 +78,11 @@ public class UserLogin {
         this.nickName = nickName;
     }
 
-    public String getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 }

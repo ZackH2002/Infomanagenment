@@ -8,8 +8,10 @@ public interface BalanceDAO {
     /**
      * 用户余额充值
      * @param balance 充值余额
+     * @param userId 用户id
+     * @return int
      */
-    void addBalance(String balance);
+    int addBalance(double balance, int userId);
 
 
 }
