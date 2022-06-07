@@ -72,4 +72,5 @@ public class UserLogin {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+
 }
