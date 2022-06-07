@@ -29,7 +29,7 @@ public class GoodsService {
      */
     public ResultVO listGoods() {
         ResultVO result = new ResultVO();
-        Map<String, List<Goods>> map = new HashMap<>(2);
+        //Map<String, List<Goods>> map = new HashMap<>(2);
         // 获取所有商品
         List<Goods> list = goodsDAO.listGoods();
         if (CollUtil.isEmpty(list)) {
