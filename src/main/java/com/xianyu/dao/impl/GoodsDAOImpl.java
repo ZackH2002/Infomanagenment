@@ -2,6 +2,7 @@ package com.xianyu.dao.impl;
 
 import com.xianyu.dao.GoodsDao;
 import com.xianyu.entity.Goods;
+import com.xianyu.entity.Order;
 import com.xianyu.utils.JDBCUtils;
 
 
@@ -88,5 +89,93 @@ public class GoodsDAOImpl implements GoodsDao {
             JDBCUtils.close(statement, conn);
         }
         return re > 0;
+    }
+
+
+    @Override
+    public boolean updateGoodsNum(int goodsId) {
+        int re;
+        // 获取jdbc连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "UPDATE goods SET num = num - 1 WHERE goods_id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, goodsId);
+             re = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCUtils.close(statement, conn);
+        }
+
+        return re > 0;
+    }
+
+    @Override
+    public boolean createOrder(Order order) {
+
+        // 获取jdbc连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "INSERT INTO goods(order_id, goods_id, goods_name, seller_id, buyer_id, order_time, url ) VALUES(?,?,?,?,?,?,?)";
+        PreparedStatement statement = null;
+        int re = 0;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, order.getOrderId());
+            statement.setInt(2, order.getGoodsId());
+            statement.setString(3, order.getGoodsName());
+            statement.setInt(4, order.getSellerId());
+            statement.setInt(5, order.getBuyerId());
+            statement.setDate(6, order.getOrderTime());
+            statement.setString(7, order.getUrl());
+            re = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            JDBCUtils.close(statement, conn);
+        }
+        return re > 0;
+    }
+
+
+    @Override
+    public List<Order> listOrder(int userId) {
+        // 获取jdbc连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "SELECT * FROM order_detail WHERE buyer_id = ?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<Order> list = new ArrayList<>();
+        Order order;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, userId);
+            // 执行查询语句
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                order = new Order();
+                order.setOrderId(resultSet.getString(1));
+                order.setGoodsId(resultSet.getInt(2));
+                order.setGoodsName(resultSet.getString(3));
+                order.setSellerId(resultSet.getInt(4));
+                order.setBuyerId(resultSet.getInt(5));
+                order.setOrderTime(resultSet.getDate(6));
+                order.setUrl(resultSet.getString(7));
+                list.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // 关闭资源
+            JDBCUtils.close(statement, conn);
+            JDBCUtils.close(resultSet);
+        }
+
+        return list;
+
     }
 }

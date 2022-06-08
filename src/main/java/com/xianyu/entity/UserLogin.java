@@ -3,7 +3,7 @@ package com.xianyu.entity;
 /**
  * @author hyc
  * @createTime 01 20:32
- * @description 用户登录信息实体
+ * @description 用户信息实体
  */
 public class UserLogin {
 
@@ -27,6 +27,10 @@ public class UserLogin {
      */
     private String nickName;
 
+    /**
+     * 用户账户余额
+     */
+    private double balance;
 
     @Override
     public String toString() {
@@ -35,6 +39,7 @@ public class UserLogin {
                 ", account='" + account + '\'' +
                 ", userPwd='" + userPwd + '\'' +
                 ", nickName='" + nickName + '\'' +
+                ", check='" + balance + '\'' +
                 '}';
     }
 
@@ -73,4 +78,11 @@ public class UserLogin {
         this.nickName = nickName;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }
