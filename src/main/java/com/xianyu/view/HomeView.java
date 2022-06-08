@@ -4,6 +4,7 @@ import com.xianyu.VO.ResultVO;
 import com.xianyu.entity.Goods;
 import com.xianyu.entity.UserLogin;
 import com.xianyu.service.GoodsService;
+import com.xianyu.service.LoginService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,15 +59,12 @@ public class HomeView extends JFrame {
         // goodsArrayList = new ArrayList<Goods>();
         goodsService = new GoodsService();
         list = goodsService.listGoods();
-
-//        for (int i = 0; i < 15; i++) {
-//            Goods goods = new Goods();
-//            goods.setName("iphone" + i);
-//            goods.setPrice(123.00);
-//            goods.setContent("这是一个嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎");
-//            goods.setUrl("C:\\Users\\Zack\\Pictures\\Saved Pictures\\123.png");
-//            goodsArrayList.add(goods);
-//        }
+//        Goods goods = new Goods();
+//        goods.setName("iphone");
+//        goods.setPrice(123.00);
+//        goods.setContent("这是一个嘎嘎嘎嘎嘎嘎嘎嘎嘎嘎");
+//        goods.setUrl("C:\\Users\\Zack\\Pictures\\Saved Pictures\\123.png");
+//        goodsArrayList.add(goods);
         HomeListMode homeListMode = new HomeListMode(list);
         jList = new JList(homeListMode);
         jList.setCellRenderer(new HomeListCellRenderer());
@@ -121,7 +119,10 @@ public class HomeView extends JFrame {
         myButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MyView(userLogin);
+                LoginService loginService = new LoginService();
+                ResultVO resultVO = loginService.login(userLogin.getAccount(),userLogin.getUserPwd());
+                UserLogin userLogin1 = (UserLogin) resultVO.getData().get("userInfo");
+                new MyView(userLogin1);
             }
         });
         homeButton.addActionListener(new ActionListener() {

@@ -83,7 +83,7 @@ public class MyView extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        balanceText = new JLabel("1234");
+        balanceText = new JLabel(String.valueOf(userLogin.getBalance()));
         balancePanel.add(balanceIcon);
         balancePanel.add(balanceText);
         balanceText.setBorder(new EmptyBorder(20,80,20,80));
@@ -143,6 +143,7 @@ public class MyView extends JFrame {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 new BalanceView(userLogin);
+                frame.dispose();
             }
         });
     }

@@ -74,7 +74,7 @@ public class PostView extends JFrame {
 
                 Goods goods = new Goods();
                 String name = nameEdit.getText();
-                int price = Integer.parseInt(priceEdit.getText());
+                double price = Double.parseDouble(priceEdit.getText());
                 String content = contentEdit.getText();
                 int num = Integer.parseInt(numEdit.getText());
                 goods.setName(name);
