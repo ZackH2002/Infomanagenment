@@ -995,80 +995,188 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <user id="291" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="292" parent="278" name="goods">
+    <table id="292" parent="278" name="collection">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="293" parent="278" name="user_login">
+    <table id="293" parent="278" name="goods">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="294" parent="292" name="goods_id">
+    <table id="294" parent="278" name="order_detail">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="295" parent="278" name="user_login">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="296" parent="292" name="coll_id">
+      <AutoIncrement>1</AutoIncrement>
+      <Comment>用户主键</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="297" parent="292" name="goods_name">
+      <Comment>收藏商品名</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="298" parent="292" name="goods_id">
+      <Comment>商品id</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="299" parent="292" name="user_id">
+      <Comment>收藏用户id</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="300" parent="292" name="goods_price">
+      <Comment>商品价格</Comment>
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="301" parent="292" name="goods_num">
+      <Comment>商品库存</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="302" parent="292" name="url">
+      <Comment>商品图片地址</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <key id="303" parent="292" name="PRIMARY">
+      <ColNames>coll_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="304" parent="293" name="goods_id">
       <AutoIncrement>1</AutoIncrement>
       <Comment>商品id</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="295" parent="292" name="name">
+    <column id="305" parent="293" name="name">
       <Comment>商品名称</Comment>
       <DataType>varchar(50)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="296" parent="292" name="price">
+    <column id="306" parent="293" name="price">
       <Comment>商品价格</Comment>
       <DataType>decimal(9,2 digit)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="297" parent="292" name="url">
+    <column id="307" parent="293" name="url">
       <Comment>商品图片</Comment>
       <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="298" parent="292" name="num">
+    <column id="308" parent="293" name="num">
       <Comment>商品库存</Comment>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
       <Position>5</Position>
     </column>
-    <column id="299" parent="292" name="seller_id">
+    <column id="309" parent="293" name="seller_id">
       <Comment>卖家id</Comment>
       <DataType>int unsigned|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="300" parent="292" name="content">
+    <column id="310" parent="293" name="content">
       <Comment>商品介绍</Comment>
       <DataType>text|0s</DataType>
       <Position>7</Position>
     </column>
-    <key id="301" parent="292" name="PRIMARY">
+    <key id="311" parent="293" name="PRIMARY">
       <ColNames>goods_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="302" parent="293" name="id">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="312" parent="294" name="order_id">
+      <Comment>订单编号</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="313" parent="294" name="goods_id">
+      <Comment>商品id</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="314" parent="294" name="goods_name">
+      <Comment>商品名</Comment>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="315" parent="294" name="seller_id">
+      <Comment>卖家id</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="316" parent="294" name="buyer_id">
+      <Comment>买家id</Comment>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="317" parent="294" name="order_time">
+      <Comment>订单时间</Comment>
+      <DataType>datetime|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="318" parent="294" name="url">
+      <Comment>商品图片地址</Comment>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <key id="319" parent="294" name="PRIMARY">
+      <ColNames>order_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="320" parent="295" name="id">
+      <AutoIncrement>5</AutoIncrement>
       <Comment>用户id 主键</Comment>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="303" parent="293" name="account">
+    <column id="321" parent="295" name="account">
       <Comment>用户账户</Comment>
       <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="304" parent="293" name="user_pwd">
+    <column id="322" parent="295" name="user_pwd">
       <Comment>用户密码</Comment>
       <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="305" parent="293" name="nick_name">
+    <column id="323" parent="295" name="nick_name">
       <Comment>用户昵称</Comment>
       <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
     </column>
-    <key id="306" parent="293" name="PRIMARY">
+    <column id="324" parent="295" name="balance">
+      <Comment>用户账户余额</Comment>
+      <DataType>double|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+      <Position>5</Position>
+    </column>
+    <key id="325" parent="295" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>

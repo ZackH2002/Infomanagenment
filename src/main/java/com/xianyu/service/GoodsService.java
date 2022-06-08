@@ -27,17 +27,16 @@ public class GoodsService {
      * 获取所有商品信息
      * @return 返回商品集合
      */
-    public ResultVO listGoods() {
+    public List<Goods> listGoods() {
         ResultVO result = new ResultVO();
         //Map<String, List<Goods>> map = new HashMap<>(2);
         // 获取所有商品
         List<Goods> list = goodsDAO.listGoods();
         if (CollUtil.isEmpty(list)) {
-            return result.message("操作失败!").code(400);
+            return null;
         }
         // 获取成功
-        map.put("goodsList", list);
-        return result.message("操作成功!").code(200);
+        return list;
     }
 
     /**

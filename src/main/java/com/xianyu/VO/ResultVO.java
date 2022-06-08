@@ -40,6 +40,11 @@ public class ResultVO {
         return this;
     }
 
+    public ResultVO data(String key, Object value) {
+        this.data.put(key, value);
+        return this;
+    }
+
     public ResultVO() {
     }
 
