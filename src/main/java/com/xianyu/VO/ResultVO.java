@@ -45,9 +45,6 @@ public class ResultVO {
         return this;
     }
 
-    public ResultVO() {
-    }
-
     public String getMessage() {
         return message;
     }
@@ -71,6 +68,7 @@ public class ResultVO {
     public void setCode(int code) {
         this.code = code;
     }
+
 
     @Override
     public String toString() {

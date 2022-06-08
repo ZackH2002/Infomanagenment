@@ -39,7 +39,7 @@ public class UserLogin {
                 ", account='" + account + '\'' +
                 ", userPwd='" + userPwd + '\'' +
                 ", nickName='" + nickName + '\'' +
-                ", check='" + balance + '\'' +
+                ", balance='" + balance + '\'' +
                 '}';
     }
 

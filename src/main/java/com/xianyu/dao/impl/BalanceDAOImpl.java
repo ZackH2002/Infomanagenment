@@ -5,6 +5,7 @@ import com.xianyu.utils.JDBCUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -37,4 +38,44 @@ public class BalanceDAOImpl implements BalanceDAO {
     }
 
 
+    @Override
+    public int getBalanceById(int userId) {
+        int balance;
+        // 获取jdbc连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "SELECT balance FROM user_login WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            balance = resultSet.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return balance;
+    }
+
+
+    @Override
+    public void deleteBalanceById(double balance, int userId) {
+        // 获取jdbc连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "UPDATE user_login SET balance = balance + ?  WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setDouble(1, balance);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JDBCUtils.close(statement, conn);
+        }
+
+    }
 }

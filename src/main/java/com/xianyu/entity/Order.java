@@ -45,6 +45,11 @@ public class Order {
      */
     private String url;
 
+    /**
+     * 商品价格
+     */
+    private double price;
+
     public String getUrl() {
         return url;
     }
@@ -99,5 +104,13 @@ public class Order {
 
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

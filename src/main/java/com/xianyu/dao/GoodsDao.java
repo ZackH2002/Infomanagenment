@@ -10,6 +10,7 @@ import java.util.List;
  * @author hyc
  */
 
+@SuppressWarnings("all")
 public interface GoodsDao {
 
     /**
@@ -46,6 +47,13 @@ public interface GoodsDao {
      * @return 用户订单集合
      */
     List<Order> listOrder(int userId);
+
+    /**
+     * 通过商品id获取商品库存
+     * @param goodsId 商品id
+     * @return 商品库存
+     */
+    int getGoodsNum(int goodsId);
 
 
 }

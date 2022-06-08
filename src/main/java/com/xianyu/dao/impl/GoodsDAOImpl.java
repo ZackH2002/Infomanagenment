@@ -18,10 +18,12 @@ import java.util.List;
  * @createTime 06 17:52
  * @description
  */
+@SuppressWarnings("all")
 public class GoodsDAOImpl implements GoodsDao {
 
     /**
      * 展示商品页
+     *
      * @return 商品集合
      */
     @Override
@@ -63,6 +65,7 @@ public class GoodsDAOImpl implements GoodsDao {
 
     /**
      * 添加商品信息
+     *
      * @param goods 商品实体
      * @return 是否添加成功
      */
@@ -85,7 +88,7 @@ public class GoodsDAOImpl implements GoodsDao {
             re = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             JDBCUtils.close(statement, conn);
         }
         return re > 0;
@@ -103,10 +106,10 @@ public class GoodsDAOImpl implements GoodsDao {
         try {
             statement = conn.prepareStatement(sql);
             statement.setInt(1, goodsId);
-             re = statement.executeUpdate();
+            re = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             JDBCUtils.close(statement, conn);
         }
 
@@ -131,10 +134,11 @@ public class GoodsDAOImpl implements GoodsDao {
             statement.setInt(5, order.getBuyerId());
             statement.setDate(6, order.getOrderTime());
             statement.setString(7, order.getUrl());
+            statement.setDouble(8, order.getPrice());
             re = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             JDBCUtils.close(statement, conn);
         }
         return re > 0;
@@ -165,6 +169,7 @@ public class GoodsDAOImpl implements GoodsDao {
                 order.setBuyerId(resultSet.getInt(5));
                 order.setOrderTime(resultSet.getDate(6));
                 order.setUrl(resultSet.getString(7));
+                order.setPrice(resultSet.getDouble(8));
                 list.add(order);
             }
         } catch (SQLException e) {
@@ -177,5 +182,26 @@ public class GoodsDAOImpl implements GoodsDao {
 
         return list;
 
+    }
+
+
+    @Override
+    public int getGoodsNum(int goodsId) {
+        int goodsNum = 0;
+        // 获取jdbc连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "SELECT balance FROM user_login WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, goodsId);
+            ResultSet resultSet = statement.executeQuery();
+            goodsNum = resultSet.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return goodsNum;
     }
 }
