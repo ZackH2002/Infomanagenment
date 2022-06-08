@@ -6,6 +6,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -55,7 +57,7 @@ public class BalanceView extends JFrame {
         balancePanel.add(balanceIcon);
         topPanel.add(balancePanel);
 
-        balanceText = new JLabel("￥22222", JLabel.CENTER);
+        balanceText = new JLabel(String.valueOf(userLogin.getBalance()), JLabel.CENTER);
         balanceText.setFont(new Font(null, Font.BOLD, 40));
 
         btnPanel = new JPanel();
@@ -71,5 +73,12 @@ public class BalanceView extends JFrame {
     }
 
     private void addClick() {
+        chargeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ChargeView(userLogin);
+                frame.dispose();
+            }
+        });
     }
 }

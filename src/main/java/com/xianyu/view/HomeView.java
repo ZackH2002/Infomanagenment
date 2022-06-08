@@ -4,6 +4,7 @@ import com.xianyu.VO.ResultVO;
 import com.xianyu.entity.Goods;
 import com.xianyu.entity.UserLogin;
 import com.xianyu.service.GoodsService;
+import com.xianyu.service.LoginService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,7 +119,10 @@ public class HomeView extends JFrame {
         myButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MyView(userLogin);
+                LoginService loginService = new LoginService();
+                ResultVO resultVO = loginService.login(userLogin.getAccount(),userLogin.getUserPwd());
+                UserLogin userLogin1 = (UserLogin) resultVO.getData().get("userInfo");
+                new MyView(userLogin1);
             }
         });
         homeButton.addActionListener(new ActionListener() {
