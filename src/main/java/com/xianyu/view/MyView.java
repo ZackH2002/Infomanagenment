@@ -146,5 +146,12 @@ public class MyView extends JFrame {
                 frame.dispose();
             }
         });
+        buyIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                new OderView(userLogin);
+            }
+        });
     }
 }

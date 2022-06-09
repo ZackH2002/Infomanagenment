@@ -70,10 +70,10 @@ public class OrderService {
      * @param userId 用户id
      * @return 商品订单集合
      */
-    public ResultVO listOrdersById(int userId) {
+    public List<Order> listOrdersById(int userId) {
         ResultVO result = new ResultVO();
         if (userId <= 0) {
-            return result.message("非法参数").code(302);
+            return null;
         }
         List<Order> orders = null;
         try {
@@ -82,7 +82,7 @@ public class OrderService {
             throw new RuntimeException(e);
         }
 
-        return result.message("操作成功!").code(200).data("list",orders);
+        return orders;
     }
 
 

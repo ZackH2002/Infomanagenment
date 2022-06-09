@@ -124,7 +124,9 @@ public class GoodsView extends JFrame {
                 collection.setGoodsPrice(goods.getPrice());
                 collection.setGoodsName(goods.getName());
                 collection.setUrl(goods.getUrl());
+                collection.setGoodsId(goods.getGoodsId());
                 collection.setUserId(userLogin.getUserId());
+                collection.setOwnerId(goods.getSellerId());
                 CollService collService = new CollService();
                 ResultVO resultVO = collService.addFavorite(collection);
                 if (resultVO.getCode() == 200){
