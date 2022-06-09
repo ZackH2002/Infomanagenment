@@ -42,6 +42,11 @@ public class Collection {
      */
     private String url;
 
+    /**
+     * 收藏品卖家id
+     */
+    private int ownerId;
+
     public Collection() {
     }
 
@@ -99,5 +104,13 @@ public class Collection {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 }

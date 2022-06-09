@@ -26,7 +26,7 @@ public class CollDAOImpl implements CollDAO {
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
-        String sql = "INSERT INTO collection(goods_name,goods_id,user_id,goods_price,goods_num,url) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO collection(goods_name,goods_id,user_id,goods_price,goods_num,url,owner_id) VALUES(?,?,?,?,?,?,?)";
         PreparedStatement statement = null;
         try {
             statement = conn.prepareStatement(sql);
@@ -35,7 +35,8 @@ public class CollDAOImpl implements CollDAO {
             statement.setInt(3, collection.getUserId());
             statement.setDouble(4, collection.getGoodsPrice());
             statement.setInt(5, collection.getGoodsNum());
-            statement.setString(5, collection.getUrl());
+            statement.setString(6, collection.getUrl());
+            statement.setInt(7,collection.getOwnerId());
             i = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -72,6 +73,7 @@ public class CollDAOImpl implements CollDAO {
                 coll.setGoodsPrice(resultSet.getDouble(5));
                 coll.setGoodsNum(resultSet.getInt(6));
                 coll.setUrl(resultSet.getString(7));
+                coll.setOwnerId(resultSet.getInt(8));
                 list.add(coll);
             }
         } catch (SQLException e) {
