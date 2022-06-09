@@ -1,9 +1,11 @@
 package com.xianyu.view;
 
 import com.xianyu.VO.ResultVO;
+import com.xianyu.entity.Collection;
 import com.xianyu.entity.Goods;
 import com.xianyu.entity.Order;
 import com.xianyu.entity.UserLogin;
+import com.xianyu.service.CollService;
 import com.xianyu.service.GoodsService;
 import com.xianyu.service.OrderService;
 
@@ -34,7 +36,6 @@ public class GoodsView extends JFrame {
     private JButton collection;
     private UserLogin userLogin;
     private int pos;
-
     public GoodsView(Goods goods, UserLogin userLogin, int pos) throws IOException {
         this.goods = goods;
         this.userLogin = userLogin;
@@ -115,6 +116,25 @@ public class GoodsView extends JFrame {
             }
         });
 
+        collection.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Collection collection = new Collection();
+                collection.setGoodsNum(goods.getNum());
+                collection.setGoodsPrice(goods.getPrice());
+                collection.setGoodsName(goods.getName());
+                collection.setUrl(goods.getUrl());
+                collection.setUserId(userLogin.getUserId());
+                CollService collService = new CollService();
+                ResultVO resultVO = collService.addFavorite(collection);
+                if (resultVO.getCode() == 200){
+                    JOptionPane.showMessageDialog(frame, resultVO.getMessage(), "收藏", -1);
+                }else {
+                    JOptionPane.showMessageDialog(frame, resultVO.getMessage(), "收藏", 0);
+                }
+
+            }
+        });
 
     }
 

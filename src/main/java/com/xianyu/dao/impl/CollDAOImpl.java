@@ -35,7 +35,7 @@ public class CollDAOImpl implements CollDAO {
             statement.setInt(3, collection.getUserId());
             statement.setDouble(4, collection.getGoodsPrice());
             statement.setInt(5, collection.getGoodsNum());
-            statement.setString(5, collection.getUrl());
+            statement.setString(6, collection.getUrl());
             i = statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
