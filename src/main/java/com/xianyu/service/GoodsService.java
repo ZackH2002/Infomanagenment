@@ -7,9 +7,8 @@ import com.xianyu.dao.GoodsDao;
 import com.xianyu.dao.impl.GoodsDAOImpl;
 
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * @author hyc
@@ -25,6 +24,7 @@ public class GoodsService {
 
     /**
      * 获取所有商品信息
+     *
      * @return 返回商品集合
      */
     public List<Goods> listGoods() {
@@ -41,6 +41,7 @@ public class GoodsService {
 
     /**
      * 添加商品信息
+     *
      * @param goods 商品实体
      * @return result
      */
@@ -56,8 +57,6 @@ public class GoodsService {
         // 添加成功
         return result.message("添加成功!").code(200);
     }
-
-
 
 
 }

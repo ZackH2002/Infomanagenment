@@ -22,13 +22,29 @@ public class CollDAOImpl implements CollDAO {
 
     @Override
     public boolean addColl(Collection collection) {
+        int i = 0;
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
-        String sql = "INSERT INTO collection(goods_name,goods_id,user_id,goods_price,goods_num)";
+        String sql = "INSERT INTO collection(goods_name,goods_id,user_id,goods_price,goods_num,url) VALUES(?,?,?,?,?,?)";
+        PreparedStatement statement = null;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, collection.getGoodsName());
+            statement.setInt(2, collection.getGoodsId());
+            statement.setInt(3, collection.getUserId());
+            statement.setDouble(4, collection.getGoodsPrice());
+            statement.setInt(5, collection.getGoodsNum());
+            statement.setString(5, collection.getUrl());
+            i = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // 关闭资源
+            JDBCUtils.close(statement, conn);
+        }
 
-
-        return false;
+        return i > 0;
     }
 
     @Override
