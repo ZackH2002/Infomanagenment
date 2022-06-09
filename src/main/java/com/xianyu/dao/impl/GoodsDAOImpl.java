@@ -122,7 +122,7 @@ public class GoodsDAOImpl implements GoodsDao {
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
-        String sql = "INSERT INTO goods(order_id, goods_id, goods_name, seller_id, buyer_id, order_time, url ) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO order_detail(order_id, goods_id, goods_name, seller_id, buyer_id, order_time, url , price) VALUES(?,?,?,?,?,?,?,?)";
         PreparedStatement statement = null;
         int re = 0;
         try {
@@ -191,13 +191,17 @@ public class GoodsDAOImpl implements GoodsDao {
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
-        String sql = "SELECT balance FROM user_login WHERE id = ?";
+        String sql = "SELECT num FROM goods WHERE goods_id = ?";
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         try {
             statement = conn.prepareStatement(sql);
             statement.setInt(1, goodsId);
-            ResultSet resultSet = statement.executeQuery();
-            goodsNum = resultSet.getInt(1);
+            resultSet = statement.executeQuery();
+            if (resultSet != null && resultSet.next()) {
+                goodsNum = resultSet.getInt(1);
+
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

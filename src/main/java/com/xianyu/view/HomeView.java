@@ -23,7 +23,7 @@ import java.util.Vector;
  * on 2022/6/2 19:27
  */
 public class HomeView extends JFrame {
-    private JFrame frame;
+    public JFrame frame;
     /**
      * 顶层窗口
      */
@@ -37,7 +37,6 @@ public class HomeView extends JFrame {
     private List<Goods> list;
     private GoodsService goodsService;
     private ArrayList<Goods> goodsArrayList;
-
     public HomeView(UserLogin userLogin) {
         this.userLogin = userLogin;
         initView();
@@ -104,7 +103,7 @@ public class HomeView extends JFrame {
                 System.out.println(i);
                 Goods goods = list.get(i);
                 try {
-                    new GoodsView(goods);
+                    new GoodsView(goods,userLogin,i);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

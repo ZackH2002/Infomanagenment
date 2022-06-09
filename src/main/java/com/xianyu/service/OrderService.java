@@ -48,6 +48,7 @@ public class OrderService {
         }
         order.setOrderId(IdUtil.simpleUUID());
         order.setOrderTime(new Date(System.currentTimeMillis()));
+        System.out.println(new Date(System.currentTimeMillis()));
         try {
             // 订单生成失败
             if (!goodsDao.createOrder(order)) {
@@ -60,7 +61,7 @@ public class OrderService {
         goodsDao.updateGoodsNum(order.getGoodsId());
         // 账户余额减少
         balanceDAO.deleteBalanceById(order.getPrice(), order.getBuyerId());
-        return result.message("操作成功!").code(200);
+        return result.message("购买成功!").code(200);
     }
 
 

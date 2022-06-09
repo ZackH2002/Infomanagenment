@@ -40,17 +40,20 @@ public class BalanceDAOImpl implements BalanceDAO {
 
     @Override
     public int getBalanceById(int userId) {
-        int balance;
+        int balance = 0;
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
         String sql = "SELECT balance FROM user_login WHERE id = ?";
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
         try {
             statement = conn.prepareStatement(sql);
             statement.setInt(1, userId);
-            ResultSet resultSet = statement.executeQuery();
-            balance = resultSet.getInt(1);
+             resultSet = statement.executeQuery();
+            if (resultSet != null && resultSet.next()) {
+                balance = resultSet.getInt(1);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -64,7 +67,7 @@ public class BalanceDAOImpl implements BalanceDAO {
         // 获取jdbc连接
         Connection conn = JDBCUtils.getConnection();
         // 编写SQL语句
-        String sql = "UPDATE user_login SET balance = balance + ?  WHERE id = ?";
+        String sql = "UPDATE user_login SET balance = balance - ?  WHERE id = ?";
         PreparedStatement statement = null;
         try {
             statement = conn.prepareStatement(sql);

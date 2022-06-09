@@ -18,7 +18,7 @@ public class HomeListCellRenderer extends JLabel implements ListCellRenderer {
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         Goods goods = (Goods) value;
         //设置JLabel文字
-        String text = "<html>"+goods.getName()+"<br/>"+"￥"+goods.getPrice()+"<html/>";
+        String text = "<html>"+goods.getName()+" 库存："+goods.getNum()+"<br/>"+"￥"+goods.getPrice()+"<html/>";
         setText(text);
         setFont(new Font(null,0,18));
         setVerticalTextPosition(SwingConstants.BOTTOM);
