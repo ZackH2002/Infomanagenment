@@ -70,8 +70,11 @@ public class HomeView extends JFrame {
         jList.setPreferredSize(new Dimension(600, 1000));
         JScrollPane jScrollPane = new JScrollPane(jList);
         jList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        int row = list.size() / 4 + 1;
-        jList.setVisibleRowCount(row);
+        if (list != null){
+            int row = list.size() / 4 + 1;
+            jList.setVisibleRowCount(row);
+        }
+
         //jScrollPane.setPreferredSize(new Dimension(600, 700));
         frame = new JFrame("首页");
         frame.setLayout(new BorderLayout());

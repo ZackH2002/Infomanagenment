@@ -50,12 +50,15 @@ public class BalanceDAOImpl implements BalanceDAO {
         try {
             statement = conn.prepareStatement(sql);
             statement.setInt(1, userId);
-             resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             if (resultSet != null && resultSet.next()) {
                 balance = resultSet.getInt(1);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            JDBCUtils.close(statement, conn);
+            JDBCUtils.close(resultSet);
         }
 
         return balance;

@@ -62,4 +62,10 @@ public interface GoodsDao {
      */
     List<Goods> listPostById(int userId);
 
+    /**
+     * 查询卖家的订单
+     * @param sellerId 卖家id
+     * @return 卖家商品集合
+     */
+    List<Order> listSellerOrder(int sellerId);
 }

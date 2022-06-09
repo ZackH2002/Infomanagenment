@@ -2,6 +2,7 @@ package com.xianyu.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import com.xianyu.VO.ResultVO;
 import com.xianyu.dao.BalanceDAO;
 import com.xianyu.dao.GoodsDao;
@@ -61,6 +62,8 @@ public class OrderService {
         goodsDao.updateGoodsNum(order.getGoodsId());
         // 账户余额减少
         balanceDAO.deleteBalanceById(order.getPrice(), order.getBuyerId());
+        // 卖家余额增加
+        balanceDAO.addBalance(order.getPrice(), order.getSellerId());
         return result.message("购买成功!").code(200);
     }
 
@@ -71,13 +74,32 @@ public class OrderService {
      * @return 商品订单集合
      */
     public List<Order> listOrdersById(int userId) {
-        ResultVO result = new ResultVO();
+
         if (userId <= 0) {
             return null;
         }
         List<Order> orders = null;
         try {
              orders = goodsDao.listOrder(userId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return orders;
+    }
+
+    /**
+     * 根据id查询卖家订单
+     * @param sellerId 卖家id
+     * @return 订单集合
+     */
+    public List<Order> listSellerOrderById(int sellerId) {
+        if (sellerId <= 0) {
+            return null;
+        }
+        List<Order> orders = null;
+        try {
+            orders = goodsDao.listSellerOrder(sellerId);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
