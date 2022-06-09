@@ -208,4 +208,43 @@ public class GoodsDAOImpl implements GoodsDao {
 
         return goodsNum;
     }
+
+
+    @Override
+    public List<Goods> listPostById(int userId) {
+        // 获取jdbc连接
+        Connection conn = JDBCUtils.getConnection();
+        // 编写SQL语句
+        String sql = "SELECT * FROM goods WHERE seller_id = ?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<Goods> list = new ArrayList<>();
+        Goods good;
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, userId);
+            // 执行查询语句
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                good = new Goods();
+                good.setGoodsId(resultSet.getInt(1));
+                good.setName(resultSet.getString(2));
+                good.setPrice(resultSet.getDouble(3));
+                good.setUrl(resultSet.getString(4));
+                good.setNum(resultSet.getInt(5));
+                good.setSellerId(resultSet.getInt(6));
+                good.setContent(resultSet.getString(7));
+                list.add(good);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // 关闭资源
+            JDBCUtils.close(statement, conn);
+            JDBCUtils.close(resultSet);
+        }
+
+        return list;
+
+    }
 }

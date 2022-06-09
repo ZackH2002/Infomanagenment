@@ -55,5 +55,11 @@ public interface GoodsDao {
      */
     int getGoodsNum(int goodsId);
 
+    /**
+     * 通过用户id查询用户发布商品信息
+     * @param userId 用户id
+     * @return 商品信息集合
+     */
+    List<Goods> listPostById(int userId);
 
 }
