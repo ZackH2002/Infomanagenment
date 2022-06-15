@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author Zack
+ * @author 黄大航
  * on 2022/6/6 19:24
  */
 public class MyView extends JFrame {

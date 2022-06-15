@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @author Zack
+ * @author 黄大航
  * on 2022/6/1 19:59
  */
 public class RegisterView extends JFrame {

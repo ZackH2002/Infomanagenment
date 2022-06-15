@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 /**
- * @author hyc
+ * @author 何雨灿
  * @createTime 01 19:53
  * @description JDBC工具类
  */

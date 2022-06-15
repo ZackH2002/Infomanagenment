@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * @author hyc
+ * @author 何雨灿
  * @createTime 01 20:42
  * @description
  */
@@ -97,7 +97,7 @@ public class LoginDaoImpl implements LoginDao {
             JDBCUtils.close(resultSet);
         }
         // 用户名不存在
-        if (resultSet != null) {
+        if (resultSet == null) {
             return false;
         }
         return true;

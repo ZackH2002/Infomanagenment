@@ -1,7 +1,7 @@
 package com.xianyu.entity;
 
 /**
- * @author hyc
+ * @author 何雨灿
  * @createTime 01 20:32
  * @description 用户信息实体
  */

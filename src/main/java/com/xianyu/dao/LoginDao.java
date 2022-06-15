@@ -3,7 +3,7 @@ package com.xianyu.dao;
 import com.xianyu.entity.UserLogin;
 
 /**
- * @author HP
+ * @author 何雨灿
  */
 public interface LoginDao {
 

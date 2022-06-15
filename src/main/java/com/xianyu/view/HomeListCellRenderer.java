@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author Zack
+ * @author 黄大航
  * on 2022/6/6 11:10
  */
 public class HomeListCellRenderer extends JLabel implements ListCellRenderer {

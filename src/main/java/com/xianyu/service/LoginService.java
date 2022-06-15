@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author hyc
+ * @author 何雨灿
  * @createTime 01 20:01
  * @description 用户登录注册逻辑
  */
@@ -43,9 +43,10 @@ public class LoginService {
     public ResultVO regis(String account, String userPwd, String nickName) {
         ResultVO result = new ResultVO();
         // 判空
-        if (account == null || userPwd == null) {
-            return result.message("用户名或密码不能为空!").code(400);
+        if (account == null || userPwd == null || "".equals(account) || "".equals(userPwd)) {
+            return result.message("账号或密码不能为空!").code(400);
         }
+
         // 判断账户是否被注册过
         if (loginDao.findUserByAccount(account)) {
             return result.message("该账户已存在!").code(400);
